@@ -18,7 +18,10 @@ int main(int argc, char *argv[]) {
     return 0;
   } else if (argc == 2 && strcmp(argv[1], "update") == 0) {
     update(repoURL, configPATH);
+  } else if (argc == 2 && strcmp(argv[1], "search") == 0) {
+    search(configPATH);
   }
+
   return 0;
 }
 

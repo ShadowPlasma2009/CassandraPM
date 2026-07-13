@@ -9,6 +9,7 @@
 
 void help(const char *version);
 int update(const char *repo_url, const char *config_path);
+int search(const char config_path*);
 void usage(void);
 
 #endif
