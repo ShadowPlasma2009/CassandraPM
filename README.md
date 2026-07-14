@@ -21,4 +21,4 @@ Make sure to have Clang or GCC installed.
 
 In the root of the project run;
 
-'clang src/cpm.c src/help.c -Iinclude -o cpm'
+'clang src/cpm.c src/help.c src/install.c src/update.c src/list.c -Iinclude -o cpm'
