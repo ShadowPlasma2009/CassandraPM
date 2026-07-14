@@ -11,4 +11,5 @@ int search(const char config_path[]) {
            "awk -F'|' '{printf \" %-12s version: %s\\n\", $1, $2}' %s/packages.db",
            config_path);
   system(search_command);
+  return 0;
 }
