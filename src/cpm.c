@@ -7,7 +7,7 @@
 int main(int argc, char *argv[]) {
   const char VERSION[] = "0.03-dev";
   const char REPO[] = "https://github.com/ShadowPlasma2009/cpm/res";
-  const char CONFIG[] = "$HOME/cpm/config";
+  const char CONFIG[] = "$HOME/Projects/cpm/res";
   const char PREFIX[] = "$HOME/cpm/usr";
   const char TEMP[] = "$HOME/cpm/tmp";
 
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     help(VERSION);
   } else if (argc == 2 && strcmp(argv[1], "update") == 0) {
     update(REPO, CONFIG);
-  } else if (argc == 2 && strcmp(argv[1], "search") == 0) {
+  } else if (argc == 2 && strcmp(argv[1], "list") == 0) {
     list(CONFIG);
   } else if (argc == 4 && (strcmp(argv[1], "install") == 0) && (strcmp(argv[3], "-R") == 0)) {
   	rinstall(argv[2], REPO, PREFIX, TEMP);
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-void usage(void) {
+int usage(void) {
   printf("Usage: cpm <command> [arguments]\n");
   return 0;
 }

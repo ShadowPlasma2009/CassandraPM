@@ -3,7 +3,10 @@
 #include <string.h>
 #include "include.h"
 
-int rinstall(char package[], char repo[], char installDir[], char installTmp[]) {
-  printf("Installing %s from %s...\n", package, repo);
-  
+int rinstall(char package[], const char repo[], const char prefix[], const char temp[]) {
+  printf("RINSTALL!!!"); 
+}
+
+int tinstall(char pkg_path[], const char prefix[], const char temp[]) {
+  printf("TINSTALL!!!");
 }
