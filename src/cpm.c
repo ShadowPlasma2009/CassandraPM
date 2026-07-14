@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
   const char repoURL[] = CPM_REPO_URL;
   const char configPATH[] = CPM_CONFIG_PATH;
   const char prefix[] = CPM_PREFIX;
+  const char cpmTMP[] = CPM_TMP;
 
   if (argc == 1) {
     usage();
@@ -20,6 +21,9 @@ int main(int argc, char *argv[]) {
     update(repoURL, configPATH);
   } else if (argc == 2 && strcmp(argv[1], "search") == 0) {
     search(configPATH);
+  } else if (argc == 4 && (strcmp(argv[1], "install") == 0) && (strcmp(argv[3], "-R") == 0)) {
+    char packageName[] = argv[2];
+  	rinstall(packageName, repoURL, prefix, cpmTMP);
   }
 
   return 0;
