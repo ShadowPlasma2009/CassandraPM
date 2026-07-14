@@ -8,7 +8,7 @@ int search(const char config_path[]) {
 
   printf("Packages available in CPM repository:\n\n");
   snprintf(search_command, sizeof(search_command),
-           "awk -F'|' '{printf \" %-12s version: %s\\n\", $1, $2}' %s/packages.db",
+           "awk -F'|' '{printf \"%%-12s version: %%s\\n\", $1, $2}' %s/packages.db",
            config_path);
   system(search_command);
   return 0;
