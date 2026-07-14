@@ -2,16 +2,11 @@
 #ifndef INCLUDE_H
 #define INCLUDE_H
 
-#define CPM_VERSION "0.02-dev"
-#define CPM_REPO_URL "https://github.com/"
-#define CPM_CONFIG_PATH "$HOME/Projects/cpm/res"
-#define CPM_PREFIX "$HOME/cpmUsr"
-#define CPM_TMP "$HOME/cpm/tmp"
-
 void help(const char *version);
-int update(const char *repo_url, const char *config_path);
-int search(const char *config_path);
-int rinstall(char *package, char *repo, char *installDir, char *installTmp);
+int update(const char *repo, const char *config);
+int list(const char *config);
+int rinstall(char *package, const char *repo, const char *prefix, const char *temp);
+int tinstall(char *pkg_path, const char *prefix, const char *temp);
 void usage(void);
 
 #endif

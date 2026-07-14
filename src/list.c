@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "include.h"
 
-int search(const char config_path[]) {
+int list(const char config_path[]) {
   char search_command[512];
 
   printf("Packages available in CPM repository:\n\n");
