@@ -4,9 +4,11 @@
 #include "include.h"
 
 int rinstall(char package[], const char repo[], const char prefix[], const char temp[]) {
-  printf("RINSTALL!!!"); 
+  printf("RINSTALL!!!\n");
+  return 0;
 }
 
 int tinstall(char pkg_path[], const char prefix[], const char temp[]) {
-  printf("TINSTALL!!!");
+  printf("TINSTALL!!!\n");
+  return 0;
 }

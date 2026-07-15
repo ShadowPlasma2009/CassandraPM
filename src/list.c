@@ -11,5 +11,9 @@ int list(const char config_path[]) {
            "awk -F'|' '{printf \"%%-12s version: %%s\\n\", $1, $2}' %s/packages.db",
            config_path);
   system(search_command);
+
+  printf("\nDependencies not listed. They will be ");
+  printf("automatically resolved and installed alongside ");
+  printf("the packages that need them.\n");
   return 0;
 }
