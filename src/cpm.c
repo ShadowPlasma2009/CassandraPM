@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
   } else if (argc == 2 && strcmp(argv[1], "list") == 0) {
     list(CONFIG);
   } else if (argc == 4 && (strcmp(argv[1], "install") == 0) && (strcmp(argv[3], "-R") == 0)) {
-  	rinstall(argv[2], REPO, PREFIX, TEMP);
+  	rinstall(argv[2], REPO, CONFIG, PREFIX, TEMP);
   } else if (argc == 4 && (strcmp(argv[1], "install") == 0) && (strcmp(argv[3], "-T") == 0)) {
     tinstall(argv[2], PREFIX, TEMP);
   }
