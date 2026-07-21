@@ -7,7 +7,7 @@
 int rinstall(char package[], const char repo[], const char config[], const char prefix[], const char temp[]) {
   char pdatabase[512];
   snprintf(pdatabase, sizeof(pdatabase), "%s/packages.db", config);
-  if (access(pdatabase, F_OK) == NULL) {
+  if (access(pdatabase, F_OK) == -1) {
     printf("packages.db file inaccessible or doesn't exist.\n");
     printf("Run 'cpm update' first to fetch packages.db!\n");
     return 1;
@@ -51,7 +51,7 @@ int rinstall(char package[], const char repo[], const char config[], const char 
   
   printf("Creating essential directories if necessary...");
   
-  if (access(prefix, F_OK) == NULL) {
+  if (access(prefix, F_OK) == -1) {
     snprintf(command, sizeof(command), "mkdir -p %s", prefix);
     system(command);
     printf("Created %s!\n", prefix);
@@ -59,7 +59,7 @@ int rinstall(char package[], const char repo[], const char config[], const char 
     printf("%s exists. Skipping...\n", prefix);
   }
 
-  if (access(temp, F_OK) == NULL) {
+  if (access(temp, F_OK) == -1) {
     snprintf(command, sizeof(command), "mkdir -p %s", temp);
     system(command);
     printf("Created %s!\n", temp);
