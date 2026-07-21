@@ -5,7 +5,7 @@
 #include "include.h"
 
 int main(int argc, char *argv[]) {
-  const char VERSION[] = "0.04-dev";
+  const char VERSION[] = "0.05-dev";
   const char REPO[] = "https://github.com/ShadowPlasma2009/cpm/res";
   const char CONFIG[] = "$HOME/Projects/cpm/res";
   const char PREFIX[] = "$HOME/cpm/usr";

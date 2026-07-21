@@ -70,9 +70,9 @@ int rinstall(char package[], const char repo[], const char config[], const char 
 
   // Download tar.gz package archive
   snprintf(command, sizeof(command), "curl -s -L -o %s/%s.tar.gz %s", temp, package, url);
-  int curl_worked = system(command);
+  int curl_res = system(command);
 
-  if (curl_worked != 0) {
+  if (curl_res != 0) {
     printf("Error: Failed to download %s\n!", package);
     return 1;
   } else {
@@ -80,8 +80,17 @@ int rinstall(char package[], const char repo[], const char config[], const char 
   }
 
   // Extract downloaded tar package archive
+  snprintf(command, sizeof(command), "tar -xzf %s/%s.tar.gz -C %s", temp, package, prefix);
+  int ext_res = system(command);
+  if (ext_res != 0) {
+    printf("Error: Failed to extract package: %s\n", package);
+    return 1;
+  }
 
+  snprintf(command, sizeof(command), "rm -f %s/%s.tar.gz", temp, package);
+  system(command);
 
+  printf("Successfully installed pacage: %s\n", package);
   return 0;
 }
 
