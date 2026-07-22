@@ -2,12 +2,21 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "include.h"
 
 int main(int argc, char *argv[]) {
-  const char VERSION[] = "0.05-dev";
-  const char REPO[] = "https://github.com/ShadowPlasma2009/cpm/res";
-  const char CONFIG[] = "$HOME/Projects/cpm/res";
+ 
+  // I don't know how this part works, but it does, SO DON'T TOUCH IT!
+  const char *home = getenv("HOME");
+  char config[256];
+  char CONFIG[256];
+  snprintf(CONFIG, sizeof(CONFIG), "%s/Projects/cpm/res", home);
+  // END | Ok I know how it works but it's quite confusing
+
+  const char REPO[] = "https://raw.githubusercontent.com/ShadowPlasma2009/CassandraPM/main/res";
+  const char VERSION[] = "0.06-dev";
   const char PREFIX[] = "$HOME/cpm/usr";
   const char TEMP[] = "$HOME/cpm/tmp";
 

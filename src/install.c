@@ -13,6 +13,8 @@ int rinstall(char package[], const char repo[], const char config[], const char 
     return 1;
   }
 
+  printf("Installing %s\n...", package);
+
   FILE *db = fopen(pdatabase, "r");
   char line[256];
   char name[16], version[16], url[128], deps[128];

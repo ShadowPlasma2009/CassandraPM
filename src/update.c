@@ -21,13 +21,13 @@ int update(const char repo[], const char config[]) {
   printf("Repo URL: %s\n", repo);
   printf("Config Path: %s\n", config);
  
-  char curl_command[256];
-  snprintf(curl_command, sizeof(curl_command),
-           "curl -s -o %s/packages.db %s", config, repo);
-  int updated_status = system(curl_command);
+  char command[256];
+  snprintf(command, sizeof(command),
+           "curl -s -L -o %s/packages.db %s/packages.db", config, repo);
+  int updated_status = system(command);
 
   if (updated_status == 0) {
-    printf("Local package database update successfully!\n");
+    printf("Local package database updated successfully!\n");
     return 0;
   } else {
     printf("Update failed! :<\n");
