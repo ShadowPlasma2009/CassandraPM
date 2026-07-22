@@ -25,4 +25,8 @@ In the root of the project run;
 clang src/cpm.c src/help.c src/install.c src/update.c src/list.c -Iinclude -o cpm
 ```
 
+Or if you are using gcc replace `clang` with `gcc`. It's also recommended to use the -Oz (Clang) or -Os (GCC) flags to optimize for size as Cassandra is meant to run in constrained environments. Completely optional. Stripping (`strip`) usually reduces the binary more than size optimization flags.
+
 Or just run `make` because I added a Makefile now.
+
+The Makefile defaults to Clang, so make sure to pass CC=gcc when running make if you are using GCC. The Makefile uses -Oz flag by default. oh shit fuck. i forgot something. -Oz is hardcoded but only clang uses it. ill fix the Makefile idk
