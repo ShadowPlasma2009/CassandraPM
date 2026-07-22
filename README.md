@@ -40,3 +40,7 @@ Use 1 centralized repo URL
 Add a cpm list -i command that lists installed packages
 
 Fill in the blanks for the other empty files like remove.c and update.c
+
+Add package logging to the install function
+
+Add tarballs to github to finally enable install to work
