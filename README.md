@@ -24,3 +24,5 @@ In the root of the project run;
 ```bash
 clang src/cpm.c src/help.c src/install.c src/update.c src/list.c -Iinclude -o cpm
 ```
+
+Or just run `make` because I added a Makefile now.
