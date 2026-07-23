@@ -6,7 +6,7 @@
 #include "include.h"
 
 int rinstall(char package[], const char repo[], const char config[], const char prefix[], const char temp[]) {
-  if (pkginstalled(package, config)) {
+  if (!pkginstalled(package, config)) {
     printf("Package: %s already installed! To upgrade packages, ", package);
     printf("run `cpm upgrade`!\n");
     return 1;
