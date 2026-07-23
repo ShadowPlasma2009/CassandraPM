@@ -5,12 +5,12 @@
 int help(const char version[]) {
   printf("Cassandra Package Manager %s\n", version);
   
-  printf("The code to this project is licensed under the ");
+  printf("\nThe code to this project is licensed under the ");
   printf("GNU General Public License v3. You can find the ");
-  printf("code at https:github.com/ShadowPlasma2009/CassandraPM\n");
+  printf("code at https://github.com/ShadowPlasma2009/CassandraPM. ");
   printf("GPLv3: https://www.gnu.org/licenses/gpl-3.0.html\n");
 
-  printf("Usage: cpm <command> [arguments]\n");
+  printf("\nUsage: cpm <command> [arguments]\n");
   printf("\nCommands:\n");
   printf("  install <package> -R - Install a package from an online repository\n");
   printf("  install <pkg_path> -T - Install a local .tar.gz package\n");

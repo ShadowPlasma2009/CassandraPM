@@ -6,11 +6,9 @@
 #include "include.h"
 
 int rinstall(char package[], const char repo[], const char config[], const char prefix[], const char temp[]) {
-  int PKGINSTALLED = pkginstalled(package, config);
-
-  if (PKGINSTALLED) {
-    printf("Package: %s already installed! To upgrade packages,", package);
-    printf("run `cpm upgrade`!");
+  if (pkginstalled(package, config)) {
+    printf("Package: %s already installed! To upgrade packages, ", package);
+    printf("run `cpm upgrade`!\n");
     return 1;
   }
 
@@ -22,7 +20,7 @@ int rinstall(char package[], const char repo[], const char config[], const char 
     return 1;
   }
 
-  printf("Installing %s\n...", package);
+  printf("Installing %s...\n", package);
 
   FILE *db = fopen(pdatabase, "r");
   char line[256];
@@ -60,7 +58,7 @@ int rinstall(char package[], const char repo[], const char config[], const char 
   
   char command[512];
   
-  printf("Creating essential directories if necessary...");
+  printf("Creating essential directories if necessary...\n");
   
   if (access(prefix, F_OK) == -1) {
     snprintf(command, sizeof(command), "mkdir -p %s", prefix);
@@ -83,7 +81,7 @@ int rinstall(char package[], const char repo[], const char config[], const char 
   int curl_res = system(command);
 
   if (curl_res != 0) {
-    printf("Error: Failed to download %s\n!", package);
+    printf("Error: Failed to download %s!\n", package);
     return 1;
   } else {
     printf("Downloaded '%s'! Proceeding to extract...\n", package);
@@ -103,13 +101,13 @@ int rinstall(char package[], const char repo[], const char config[], const char 
   printf("Successfully installed pacage: %s\n", package);
   
   // Package logging, format: yy/mm/dd|package
-  if (PKGINSTALLED) {
+  if (pkginstalled(package, config)) {
     char file[128], logline[128], date[12];
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
     strftime(date, sizeof(date), "%Y-%m-%d", t);
 
-    snprintf(logline, sizeof(logline), "\nInstalled:%s|%s", package, date);
+    snprintf(logline, sizeof(logline), "\nInstalled:%s|%s\n", package, date);
     snprintf(file, sizeof(file), "%s/pkglog.txt", config);
     FILE *logf = fopen(file, "a");
     fprintf(logf, "%s", logline);
@@ -118,11 +116,11 @@ int rinstall(char package[], const char repo[], const char config[], const char 
     printf("Not logging package: %s. Already installed.\n", package);
   }
     
-  if (PKGINSTALLED) {
+  if (pkginstalled(package, config)) {
     char file[128];
     snprintf(file, sizeof(file), "%s/packages.installed", config);
     FILE *pkgs = fopen(file, "a");
-    fprintf(pkgs, "%s", package);
+    fprintf(pkgs, "%s\n", package);
     fclose(pkgs);
   } else {
     printf("Not adding package to installed package list. Package: %s is already installed.\n", package);
@@ -137,27 +135,27 @@ int tinstall(char pkg_path[], const char prefix[], const char temp[]) {
 }
 
 int pkginstalled(char package[], const char config[]) {
-  char log_path[128];
+  char log_path[256];
 
   snprintf(log_path, sizeof(log_path), "%s/packages.installed", config);
   FILE *lfile = fopen(log_path, "r");
-
   if (!lfile) {
     return 1;
   }
 
-  char line[32];
-  char inst_package[32];
-  int found = 0;
+  // Idk how the following works, don't touch it either
+  char line[64];
+  char pkg_file[64];
 
   while (fgets(line, sizeof(line), lfile)) {
-    if (scanf(line, "%63s", inst_package) == 1) {
-      found = 1;
-      break;
+    if (sscanf(line, "%63s", pkg_file) == 1) {
+      if (strcmp(pkg_file, package) == 0) {
+        fclose(lfile);
+        return 0;
+      }
     }
   }
 
   fclose(lfile);
-
-  return found ? 0 : 1;
+  return 1;
 }
