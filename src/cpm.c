@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
   // END | Ok I know how it works but it's quite confusing
 
   const char REPO[] = "https://raw.githubusercontent.com/ShadowPlasma2009/CassandraPM/main/res";
-  const char VERSION[] = "0.07-dev";
+  const char VERSION[] = "0.08-dev";
   const char PREFIX[] = "$HOME/cpm/usr";
   const char TEMP[] = "$HOME/cpm/tmp";
 
