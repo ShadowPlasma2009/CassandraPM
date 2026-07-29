@@ -24,11 +24,12 @@ int rinstall(char package[], const char repo[], const char config[], const char 
 
   FILE *db = fopen(pdatabase, "r");
   char line[256];
-  char name[16], version[16], url[128], deps[128];
+  // package names shoudn't be longer than 16 characters, right?
+  char name[16], version[16], hasdeps[128];
   int found = 0;
 
   while (fgets(line, sizeof(line), db)) {
-    if (sscanf(line, "%[^|]|%[^|]|%[^|]|%s", name, version, url, deps) == 4) {
+    if (sscanf(line, "%[^|]%[^|]%s", name, version, hasdeps) == 4) {
       if (strcmp(name, package) == 0) {
         found = 1;
         break;
@@ -42,24 +43,12 @@ int rinstall(char package[], const char repo[], const char config[], const char 
     return 1;
   }
 
-  if (strcmp(deps, "none") != 0) {
-    printf("Resolving dependencies for %s...\n", package);
-    char *dep = strtok(deps, ",");
-    while (dep != NULL) {
-      printf("Checking dependency: '%s'...\n", dep);
-      rinstall(dep, repo, config, prefix, temp);
-      dep = strtok(NULL, ",");
-    }
-  } else {
-    printf("'%s' has no dependencies. Skipping...\n", package);
-  }
-
   printf("Installing %s (%s) from %s...\n", package, version, url);
-  
+
   char command[512];
-  
+
   printf("Creating essential directories if necessary...\n");
-  
+
   if (access(prefix, F_OK) == 0) {
     snprintf(command, sizeof(command), "mkdir -p %s", prefix);
     system(command);
@@ -92,14 +81,15 @@ int rinstall(char package[], const char repo[], const char config[], const char 
   int ext_res = system(command);
   if (ext_res != 0) {
     printf("Error: Failed to extract package: %s\n", package);
+    snprintf(command, sizeof(command), "rm -f %s/%s.tar.gz", temp, package);
     return 1;
   }
 
   snprintf(command, sizeof(command), "rm -f %s/%s.tar.gz", temp, package);
   system(command);
 
-  printf("Successfully installed pacage: %s\n", package);
-  
+  printf("Successfully installed package: %s\n", package);
+
   // Package logging, format: yy/mm/dd|package
   if (!pkginstalled(package, config)) {
     char file[128], logline[128], date[12];
@@ -115,7 +105,7 @@ int rinstall(char package[], const char repo[], const char config[], const char 
   } else {
     printf("Not logging package: %s. Already installed.\n", package);
   }
-    
+
   if (!pkginstalled(package, config)) {
     char file[128];
     snprintf(file, sizeof(file), "%s/packages.installed", config);
